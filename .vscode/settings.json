@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "TEST.C": "cpp",
+        "TESTING.C": "cpp",
+        "_defs.h": "c"
+    }
+}

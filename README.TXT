@@ -1,7 +1,7 @@
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║   ▄▄▄▄ ▄▄▄▄▄▄ ▄▄▄▄ ▄▄  ▄▄ ▄▄  ▄▄ ▄▄  ▄▄    ▄▄▄▄  ▄▄▄▄  ▄▄▄ ▄▄▄  ▄▄▄▄▄  ▄▄▄▄  ║
-║  ▀█▄▄    ██    ██  ██▀▄██ ██▄▄▀  ▀█▄▄█▀   ██ ▄▄ ██▄▄██ ██ ██ ██ ██▄▄  ▀█▄▄   ║
-║  ▄▄▄█▀   ██   ▄██▄ ██  ██ ██  █▄   ██     ▀█▄▄█ ██  ██ ██ ██ ██ ██▄▄▄ ▄▄▄█▀  ║
+║  ▀█▄▄    ██    ██  ██▀▄██ ██▄█▀  ▀█▄▄█▀   ██ ▄▄ ██▄▄██ ██ ██ ██ ██▄▄  ▀█▄▄   ║
+║  ▄▄▄█▀   ██   ▄██▄ ██  ██ ██ ▀█▄   ██     ▀█▄▄█ ██  ██ ██ ██ ██ ██▄▄▄ ▄▄▄█▀  ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
          COMING SOON TO A MS-DOS COMPUTER NEAR YOU: PROJECT "THE MAN"!
@@ -14,7 +14,8 @@ FULLY OPEN SOURCE MS-DOS PLATFORMER ENGINE UNDER THE GNU GENERAL PUBLIC LICENSE!
 ═ On to the actual readme file... ═════════════════════════════════════════════
 
 - How do I compile a copy of [ THIS GAME HAS NO NAME ]?
-    Get Borland Turbo C++ for DOS and run BUILD.BAT.
+    On a modern computer, run GFX\SPRENC.PY, then on your DOS machine,
+    make sure you have Borland Turbo C++ and run BUILD.BAT.
 
 - Can I contribute?
     You can fork your own version, but for now we will deny all pull requests.

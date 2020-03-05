@@ -5,8 +5,10 @@
 
 from PIL import Image
 
-sprs = Image.open("SPRITES.PNG")
-binout = open("SPRITES.TMF", "wb")
+f = "BG"
+
+sprs = Image.open(f+".PNG")
+binout = open(f+".TMF", "wb")
 
 def write(b):
     print("writing",b)
