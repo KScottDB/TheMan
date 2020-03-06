@@ -6,9 +6,9 @@
 #include <dos.h>
 
 #define VGA_REGISTER_INPUT_STATUS_1 0x3da
-#define VGA_STATUS_BIT_RETRACE 8
-#define VGA_PALETTE_COLORID_WRITE 0x3c8
-#define VGA_PALETTE_COLOR_IO      0x3c9
+#define VGA_PALETTE_COLORID_WRITE 	0x3c8
+#define VGA_PALETTE_COLOR_IO      	0x3c9
+#define VGA_STATUS_BIT_RETRACE 		8
 
 // VGA_* defines from Kiri also ^^
 
