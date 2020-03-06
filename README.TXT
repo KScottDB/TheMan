@@ -15,7 +15,7 @@ FULLY OPEN SOURCE MS-DOS PLATFORMER ENGINE UNDER THE GNU GENERAL PUBLIC LICENSE!
 
 - How do I compile a copy of [ THIS GAME HAS NO NAME ]?
     On a modern computer, run GFX\SPRENC.PY, then on your DOS machine,
-    make sure you have Borland Turbo C++ and run BUILD.BAT.
+    make sure you have Borland Turbo C++ 3.0 and run BUILD.BAT.
 
 - Can I contribute?
     You can fork your own version, but for now we will deny all pull requests.
