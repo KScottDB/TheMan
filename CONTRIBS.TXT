@@ -1,0 +1,9 @@
+	GENERAL PROGRAMMING HELP
+Kiri
+sh0ck
+Electroduck
+asie
+
+	DIRECT CONTRIBUTORS
+KScottDB (Stinky Games)
+Kiri: SRC/CONTRIB/KIRI.C

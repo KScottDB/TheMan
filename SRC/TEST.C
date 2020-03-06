@@ -5,28 +5,7 @@
 #include <graphics.h>
 #include <dos.h>
 
-#define VGA_REGISTER_INPUT_STATUS_1 0x3da
-#define VGA_PALETTE_COLORID_WRITE 	0x3c8
-#define VGA_PALETTE_COLOR_IO      	0x3c9
-#define VGA_STATUS_BIT_RETRACE 		8
-
-// VGA_* defines from Kiri also ^^
-
-void vgaRTS(void) // ReTrace Start
-{
-	while(
-		inp(VGA_REGISTER_INPUT_STATUS_1) & VGA_STATUS_BIT_RETRACE
-	) {}
-}
-
-void vgaRTE(void) // ReTrace End
-{
-	while(
-		!(inp(VGA_REGISTER_INPUT_STATUS_1) & VGA_STATUS_BIT_RETRACE)
-	) {}
-}
-
-// Thanks for vgaRTS/RTE, @Kiri#0486! (DOS Shareware Zone server)
+#include "CONTRIB/KIRI.C"
 
 #define screenWidth 320
 #define screenHeight 200
