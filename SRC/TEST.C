@@ -22,7 +22,8 @@ typedef unsigned short word;
 #define PAL_SIZE 256*3
 
 void loadBG(byte far* video, const char* filename) {
-	byte *palette, *header;
+	byte *palette, *header, *image;
+	word image_width, image_height;
 	int i, j;
 	FILE *fp;
 
@@ -35,12 +36,19 @@ void loadBG(byte far* video, const char* filename) {
 
 	fread(palette, PAL_SIZE, 1, fp);
 
+	fread(&image_width, 2, 1, fp);
+	fread(&image_height, 2, 1, fp);
+
+	image = (byte*) malloc(image_width * image_height);
+
+	fread(image, image_width * image_height, 1, fp);
+
 	outp(VGA_PALETTE_COLORID_WRITE, 0);
 	for (i = 0; i <= PAL_SIZE; i++) { // set palette
 		outp(VGA_PALETTE_COLOR_IO, palette[i] >> 2);
 	}
 
-	fread(video, SCREEN_AREA, 1, fp);
+	memcpy(video, image, SCREEN_AREA);
 }
 
 void changeVideoMode(byte mode) {
