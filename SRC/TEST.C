@@ -6,33 +6,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+// CONTRIBUTIONS
+#include "CONTRIB/KIRI.C"
+
 // Needed to stop compiler complaining
 #undef outp
 
-#define VGA_REGISTER_INPUT_STATUS_1 0x3da
-#define VGA_STATUS_BIT_RETRACE 8
-#define VGA_PALETTE_COLORID_WRITE 0x3c8
-#define VGA_PALETTE_COLOR_IO      0x3c9
-
 typedef unsigned char  byte;
 typedef unsigned short word;
-
-// VGA_* defines from Kiri also ^^
-void vgaRTS(void) // ReTrace Start
-{
-	while(
-		inp(VGA_REGISTER_INPUT_STATUS_1) & VGA_STATUS_BIT_RETRACE
-	) {}
-}
-
-void vgaRTE(void) // ReTrace End
-{
-	while(
-		!(inp(VGA_REGISTER_INPUT_STATUS_1) & VGA_STATUS_BIT_RETRACE)
-	) {}
-}
-
-// Thanks for vgaRTS/RTE, @Kiri#0486! (DOS Shareware Zone server)
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 200
@@ -46,7 +27,7 @@ void loadBG(byte far* video, const char* filename) {
 	FILE *fp;
 
 	palette = (byte*) malloc(PAL_SIZE);
-	header = (byte*) malloc(3);
+	header =  (byte*) malloc(3);
 
 	fp = fopen(filename, "r");
 
@@ -73,9 +54,9 @@ void changeVideoMode(byte mode) {
 
 void main() {
 	// FILE* fp;
-	int x,y,color;
+	int x, y, color;
 	word i;
-	byte far*VGA = (byte far*)MK_FP(0xA000, 0);
+	byte far* VGA = (byte far*) MK_FP(0xA000, 0);
 
 	changeVideoMode(0x13); // Switch to 256-color VGA
 

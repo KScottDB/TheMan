@@ -18,7 +18,8 @@ FULLY OPEN SOURCE MS-DOS PLATFORMER ENGINE UNDER THE GNU GENERAL PUBLIC LICENSE!
     make sure you have Borland Turbo C++ 3.0 and run BUILD.BAT.
 
 - Can I contribute?
-    You can fork your own version, but for now we will deny all pull requests.
+    Yes. Please send pull requests.
+    Make sure to properly credit yourself in CONTRIBS.TXT!
 
 - What the hell is "Stinky Games"?
     https://stinky.kscott.cf
