@@ -9,7 +9,8 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "_MY_LINTER_SUCKS"
             ],
             "cStandard": "c99",
             "cppStandard": "c++98"

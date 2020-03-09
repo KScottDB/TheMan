@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 // CONTRIBUTIONS
 #include "CONTRIB/KIRI.C"
@@ -23,28 +24,30 @@ typedef unsigned short word;
 
 void loadBG(byte far* video, const char* filename) {
 	byte *palette, *header, *image;
-	word image_width, image_height;
-	int i, j;
+	word pal_size, image_width, image_height, i;
 	FILE *fp;
 
-	palette = (byte*) malloc(PAL_SIZE);
-	header =  (byte*) malloc(3);
+	header  = (byte*) malloc(4);
 
 	fp = fopen(filename, "r");
 
-	fread(header, 3, 1, fp); // READ HEADER (SKIP)
+	fread(header, 4, 1, fp); // Get header
+	//assert(header == "TMF"); // Magic number check (DOESN'T WORK???)
 
-	fread(palette, PAL_SIZE, 1, fp);
+	fread(&pal_size,     sizeof(word), 1, fp); // Get palette size
+	palette = malloc(pal_size);
 
-	fread(&image_width, 2, 1, fp);
-	fread(&image_height, 2, 1, fp);
+	fread(palette, pal_size, 1, fp); // Get palette
+
+	fread(&image_width,  sizeof(word), 1, fp); // Get image size
+	fread(&image_height, sizeof(word), 1, fp);
 
 	image = (byte*) malloc(image_width * image_height);
 
 	fread(image, image_width * image_height, 1, fp);
 
 	outp(VGA_PALETTE_COLORID_WRITE, 0);
-	for (i = 0; i <= PAL_SIZE; i++) { // set palette
+	for (i = 0; i <= pal_size; i++) { // set palette
 		outp(VGA_PALETTE_COLOR_IO, palette[i] >> 2);
 	}
 

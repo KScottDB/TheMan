@@ -6,4 +6,5 @@ asie
 
 	DIRECT CONTRIBUTORS
 KScottDB (Stinky Games)
-Kiri: SRC/CONTRIB/KIRI.C
+sh0ck
+Kiri

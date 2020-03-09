@@ -14,8 +14,14 @@ FULLY OPEN SOURCE MS-DOS PLATFORMER ENGINE UNDER THE GNU GENERAL PUBLIC LICENSE!
 ═ On to the actual readme file... ═════════════════════════════════════════════
 
 - How do I compile a copy of [ THIS GAME HAS NO NAME ]?
-    On a modern computer, run GFX\SPRENC.PY, then on your DOS machine,
-    make sure you have Borland Turbo C++ 3.0 and run BUILD.BAT.
+    On a modern computer, run GFX\SPRENC.PY (requires Python 3 and PIL/Pillow),
+    then on your DOS machine, make sure you have Borland Turbo C++ 3.0 and
+    run BUILD.BAT.
+
+- When I open the .PNGs in (insert editor) and save, it breaks the graphics!
+    Your editor probably saved it in a non-paletted format,
+    the graphics need to be paletted to convert properly.
+    I recommend MtPaint.
 
 - Can I contribute?
     Yes. Please send pull requests.
