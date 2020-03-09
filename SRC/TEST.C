@@ -1,96 +1,71 @@
+#include <alloc.h>
+#include <conio.h>
+#include <dos.h>
+#include <graphics.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
-#include <alloc.h>
-#include <graphics.h>
-#include <dos.h>
+#include <string.h>
 
+// CONTRIBUTIONS
 #include "CONTRIB/KIRI.C"
 
-#define screenWidth 320
-#define screenHeight 200
-#define screenArea screenWidth*screenHeight
+// Needed to stop compiler complaining
+#undef outp
 
-#define palSize 256*3
+typedef unsigned char  byte;
+typedef unsigned short word;
 
-void loadRaw(unsigned char far* VRAM, const char* filename, int seek) {
-	unsigned file_handle;
-	unsigned nread;
-	union REGS regs;
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 200
+#define SCREEN_AREA SCREEN_WIDTH*SCREEN_HEIGHT
 
-	_dos_open(filename, 0, &file_handle);
-	
-	// seek to seek in nread
-	regs.h.ah = 0x42;
-	regs.h.al = 0x0;
-	regs.x.bx = nread;
-	regs.x.cx:dx = seek; //????????
-	intdos(regs, NULL);
+#define PAL_SIZE 256*3
 
-	_dos_read(file_handle, VRAM, screenArea, &nread);
+void loadBG(byte far* video, const char* filename) {
+	byte *palette, *header;
+	int i, j;
+	FILE *fp;
 
-	assert(nread == screenArea);
-
-	_dos_close(file_handle);
-}
-
-void loadBG(unsigned char far* VRAM, const char* filename) {
-	unsigned char* palette = malloc(palSize); 
-	int i;
-	FILE* fp;
-	char* buffer = malloc(19);
+	palette = (byte*) malloc(PAL_SIZE);
+	header =  (byte*) malloc(3);
 
 	fp = fopen(filename, "r");
 
-	fread(buffer, 19, 1, fp); // CHECK HEADERS
-	assert(buffer == "TMF\00T\00PAL'D-IMG\00P\00");
-	
-	fread(palette, palSize, 1, fp);
+	fread(header, 3, 1, fp); // READ HEADER (SKIP)
+
+	fread(palette, PAL_SIZE, 1, fp);
 
 	outp(VGA_PALETTE_COLORID_WRITE, 0);
-	for (i = 0; i <= palSize; i++) { // set palette
-		outp(VGA_PALETTE_COLOR_IO, buffer[i] >> 2);
+	for (i = 0; i <= PAL_SIZE; i++) { // set palette
+		outp(VGA_PALETTE_COLOR_IO, palette[i] >> 2);
 	}
 
-	loadRaw(VRAM, filename, fseek(fp,0,0));
+	fread(video, SCREEN_AREA, 1, fp);
 }
 
-void changeVideoMode(int mode) {
-
-	// Construct registers object
-
+void changeVideoMode(byte mode) {
 	union REGS regs;
-	struct WORDREGS wr;
 
- 	wr.ax = mode;
-	regs.x = wr;
-
-	// Pass to int86
-
-	int86(0x10, &regs, NULL);
+	regs.h.ah = 0x00;
+	regs.h.al = mode;
+	int86(0x10, &regs, &regs);
 	// equivalent: asm { mov ax, [mode]; int 10h }
-
-	return;
-
 }
 
-int main() {
-	FILE* fp;
-	unsigned char far* VRAM = MK_FP(0xA000, 0);
-//	char* BG = malloc(screenArea);
+void main() {
+	// FILE* fp;
+	int x, y, color;
+	word i;
+	byte far* VGA = (byte far*) MK_FP(0xA000, 0);
 
 	changeVideoMode(0x13); // Switch to 256-color VGA
 
-	loadBG(VRAM, "BG.TMF");
-
+	loadBG(VGA, "BG.TMF");
 	vgaRTS(); vgaRTE();
 
-	getch();
-	getch();
-	getch();
-	getch();
+	while(!kbhit()) {}
 
-	changeVideoMode(0x2); // switch back to text mode
-	
-	return 0;
+	changeVideoMode(0x3); // switch back to text mode
+
+	return;
 }

@@ -22,25 +22,22 @@ sprs = Image.open(f+".PNG")
 binout = open(f+".TMF", "wb")
 
 def write(b):
-    print("writing",b)
     i = b
-    if type(i) is int: i = i.to_bytes(2, 'big') # if integer, convert to 2-byte integer
+    if type(i) is int: i = i.to_bytes(1, byteorder='little', signed=False) # if integer, treat it as a single byte since max value is 255
     if type(i) is str: i = i.encode()           # if string, encode to bytes-like
     binout.write(bytes(i))
 
 write("TMF") # "Magic Number" (header)
 
-write("\00T\00PAL'D-IMG") # TYPE "PALetteD-IMaGe"
+print(sprs.getpalette())
+for i in sprs.getpalette():
+    write(i) # write palette data to file
 
-write("\00P\00") # PALETTE
-write(sprs.palette.getdata()[1]) # write palette data to file
+# write(sprs.width)  # write width and height values
+# write(sprs.height)
 
-write("\00S\00") # SIZE
-write(sprs.width)  # write width and height values
-write(sprs.height)
-
-write("\00D\00") # DATA
-write(sprs.getdata()) # write every pixel (one byte each for 256 color)
+for i in sprs.getdata():
+    write(chr(i)) # write every pixel (one byte each for 256 color)
 
 sprs.close()
 binout.close()
