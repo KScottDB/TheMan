@@ -21,17 +21,19 @@ f = "BG"
 sprs = Image.open(f+".PNG")
 binout = open(f+".TMF", "wb")
 
-def write(b):
+def write(b, big=False):
     i = b
     if type(i) is list or type(i) is tuple:
-        write(len(i))
-        for j in i: write(j)
+        write(len(i), True)
+        for j in i: write(j, big)
         return
 
     print("Writing",b)
     if type(i) is int:
-        if i > 255:
+        if big:
             i = i.to_bytes(2, byteorder='little', signed=False) # if integer, larg
+        else:
+            i = i.to_bytes(1, byteorder='little', signed=False)
 
     if type(i) is str:
         i = i.encode()           # if string, encode to bytes-like
@@ -40,12 +42,12 @@ def write(b):
 
 write("TMF\0") # "Magic Number" (header)
 
-write( sprs.getpalette() ) # write palette data to file
+write( sprs.getpalette(), False ) # write palette data to file
 
-write(sprs.width)  # write width and height values
-write(sprs.height)
+write(sprs.width, True)  # write width and height values
+write(sprs.height, True)
 
-write( sprs.getdata() ) # write every pixel (one byte each for 256 color)
+write( sprs.getdata(), False ) # write every pixel (one byte each for 256 color)
 
 sprs.close()
 binout.close()

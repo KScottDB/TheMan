@@ -3,3 +3,5 @@
 *.EXE
 *.BAK
 BIN
+THEMAN-cppcheck-build-dir
+THEMAN.cppcheck
