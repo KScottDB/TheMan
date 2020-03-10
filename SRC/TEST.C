@@ -17,9 +17,9 @@
 
 void main() {
 	changeVideoMode(0x13); // Switch to 256-color VGA
-	
+
 	loadBG("BG.TMF");
-	vgaRTS(); vgaRTE();
+	VSync();
 
 	while(!kbhit()) {}
 

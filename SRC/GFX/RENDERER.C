@@ -19,18 +19,22 @@
 #define VGA_PALETTE_COLOR_IO      	0x3c9
 #define VGA_STATUS_BIT_RETRACE 		8
 
-void vgaRTS(void) // ReTrace Start
+void VStart(void) // ReTrace Start
 {
 	while(
 		inp(VGA_REGISTER_INPUT_STATUS_1) & VGA_STATUS_BIT_RETRACE
 	) {}
 }
 
-void vgaRTE(void) // ReTrace End
+void VEnd(void) // ReTrace End
 {
 	while(
 		!(inp(VGA_REGISTER_INPUT_STATUS_1) & VGA_STATUS_BIT_RETRACE)
 	) {}
+}
+
+void VSync(void) {
+    VStart(); VEnd();
 }
 
 #define SCREEN_WIDTH 320
@@ -38,6 +42,8 @@ void vgaRTE(void) // ReTrace End
 #define SCREEN_AREA SCREEN_WIDTH*SCREEN_HEIGHT
 
 #define PAL_SIZE 256*3
+
+byte* VGARAM = (byte*)0xA0000000L;
 
 void changeVideoMode(byte mode) {
 	union REGS regs;
@@ -58,7 +64,5 @@ void setPal(char* palette, int pal_size) {
 }
 
 void VRAMCopy(char* memory, int amount) {
-    byte far* VGA = (byte far*) MK_FP(0xA000, 0);
-
-    memcpy(VGA, memory, amount);
+    memcpy(VGARAM, memory, amount);
 }
