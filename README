@@ -1,8 +1,8 @@
-ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
-บ   ÜÜÜÜ ÜÜÜÜÜÜ ÜÜÜÜ ÜÜ  ÜÜ ÜÜ  ÜÜ ÜÜ  ÜÜ    ÜÜÜÜ  ÜÜÜÜ  ÜÜÜ ÜÜÜ  ÜÜÜÜÜ  ÜÜÜÜ  บ
-บ  ฿ÛÜÜ    ÛÛ    ÛÛ  ÛÛ฿ÜÛÛ ÛÛÜÛ฿  ฿ÛÜÜÛ฿   ÛÛ ÜÜ ÛÛÜÜÛÛ ÛÛ ÛÛ ÛÛ ÛÛÜÜ  ฿ÛÜÜ   บ
-บ  ÜÜÜÛ฿   ÛÛ   ÜÛÛÜ ÛÛ  ÛÛ ÛÛ ฿ÛÜ   ÛÛ     ฿ÛÜÜÛ ÛÛ  ÛÛ ÛÛ ÛÛ ÛÛ ÛÛÜÜÜ ÜÜÜÛ฿  บ
-ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+โ•”โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•—
+โ•‘   โ–โ–โ–โ– โ–โ–โ–โ–โ–โ– โ–โ–โ–โ– โ–โ–  โ–โ– โ–โ–  โ–โ– โ–โ–  โ–โ–    โ–โ–โ–โ–  โ–โ–โ–โ–  โ–โ–โ– โ–โ–โ–  โ–โ–โ–โ–โ–  โ–โ–โ–โ–  โ•‘
+โ•‘  โ–€โ–โ–โ–    โ–โ–    โ–โ–  โ–โ–โ–€โ–โ–โ– โ–โ–โ–โ–โ–€  โ–€โ–โ–โ–โ–โ–€   โ–โ– โ–โ– โ–โ–โ–โ–โ–โ– โ–โ– โ–โ– โ–โ– โ–โ–โ–โ–  โ–€โ–โ–โ–   โ•‘
+โ•‘  โ–โ–โ–โ–โ–€   โ–โ–   โ–โ–โ–โ– โ–โ–  โ–โ– โ–โ– โ–€โ–โ–   โ–โ–     โ–€โ–โ–โ–โ– โ–โ–  โ–โ– โ–โ– โ–โ– โ–โ– โ–โ–โ–โ–โ– โ–โ–โ–โ–โ–€  โ•‘
+โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•
 
          COMING SOON TO A MS-DOS COMPUTER NEAR YOU: PROJECT "THE MAN"!
 FULLY OPEN SOURCE MS-DOS PLATFORMER ENGINE UNDER THE GNU GENERAL PUBLIC LICENSE!
@@ -11,7 +11,7 @@ FULLY OPEN SOURCE MS-DOS PLATFORMER ENGINE UNDER THE GNU GENERAL PUBLIC LICENSE!
 
               CHECK IT OUT TODAY! https://github.com/KScottDB/TheMan
 
-อ On to the actual readme file... ออออออออออออออออออออออออออออออออออออออออออออออ
+โ• On to the actual readme file... โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•
 
 - How do I compile a copy of "Project THE MAN"?
     On a modern computer, run GFX\SPRENC.PY (requires Python 3 and PIL/Pillow),
@@ -33,5 +33,5 @@ FULLY OPEN SOURCE MS-DOS PLATFORMER ENGINE UNDER THE GNU GENERAL PUBLIC LICENSE!
 - Why did you give it the codename "THE MAN"?
     the guy i drew. he is the man.
 
-When modifying README.TXT or README, remember to save README.TXT as UTF-8
-and README as OEM (ANSI, IBM Extended, DOS, etc...) to preserve the art!!
+When modifying README.TXT or README, remember to save README as UTF-8
+and README.TXT as OEM (ANSI, IBM Extended, DOS, etc...) to preserve the art!!
