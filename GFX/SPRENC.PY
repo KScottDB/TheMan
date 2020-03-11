@@ -42,7 +42,8 @@ def write(b, big=False):
 
 write("TMF\0") # "Magic Number" (header)
 
-write( sprs.getpalette(), False ) # write palette data to file
+write( len( sprs.palette.getdata()[1] ), True ) # write palette size
+write( sprs.palette.getdata()[1], False ) # write palette data
 
 write(sprs.width, True)  # write width and height values
 write(sprs.height, True)

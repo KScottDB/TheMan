@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "*.C": "c" // vs code is big dumby. that es al
+        "*.C": "c",
+        "typedefs.h": "c",
+        "TYPEDEFS.H": "cpp"
     }
 }

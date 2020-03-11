@@ -1,7 +1,7 @@
 ////////////////////////////////////////
 /// PROJECT "THE MAN": VGA RENDERER  ///
 ///         STINKY GAMES 2020        ///
-//////////////////////////////////////// 
+////////////////////////////////////////
 // This file is here for portability. //
 // Later on, I can replace routines   //
 //    in this file with ones that     //
@@ -10,6 +10,7 @@
 //       ported to SDL, etc.          //
 ////////////////////////////////////////
 
+#include <dos.h>
 #include "TYPEDEFS.H"
 
 // thanks kiri for a lot of vga codez!!
@@ -43,9 +44,10 @@ void VSync(void) {
 
 #define PAL_SIZE 256*3
 
-byte* VGARAM = (byte*)0xA0000000L;
+byte* VGARAM = (byte*)0xA0000000;
+byte* PALRAM;
 
-void changeVideoMode(byte mode) {
+void vgaMode(byte mode) {
 	union REGS regs;
 
 	regs.h.ah = 0x00;
@@ -54,15 +56,29 @@ void changeVideoMode(byte mode) {
 	// equivalent: asm { mov ax, [mode]; int 10h }
 }
 
-void setPal(char* palette, int pal_size) {
-    word i;
+void gfxStart(void) {
+	PALRAM = (byte*) malloc(PAL_SIZE);
+	vgaMode(0x13);
+}
+
+void gfxEnd(void) {
+	vgaMode(0x3);
+}
+
+void palUpdate(void) {
+    int i;
 
 	outp(VGA_PALETTE_COLORID_WRITE, 0);
-	for (i = 0; i <= pal_size; i++) { // set palette
-		outp(VGA_PALETTE_COLOR_IO, palette[i] >> 2);
+	for (i = 0; i <= PAL_SIZE; i++) { // set palette
+		outp(VGA_PALETTE_COLOR_IO, PALRAM[i] >> 2);
 	}
 }
 
-void VRAMCopy(char* memory, int amount) {
+void palSet(char* palette, int pal_size) {
+	memcpy(PALRAM, palette, pal_size);
+	palUpdate();
+}
+
+void vgaCopy(char* memory, int amount) {
     memcpy(VGARAM, memory, amount);
 }

@@ -4,15 +4,16 @@
             "name": "Turbo C",
             "includePath": [
                 "${workspaceFolder}/**",
-                "E:\\DOSBOX\\TC\\INCLUDE\\"
+                "E:\\DOSBOX\\TC\\INCLUDE\\",
+                "${workspaceFolder}/SRC"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE",
-                "_MY_LINTER_SUCKS"
+                "_AL"
             ],
-            "cStandard": "c99",
+            "cStandard": "c89",
             "cppStandard": "c++98"
         }
     ],

@@ -2,6 +2,8 @@
 *.OBJ
 *.EXE
 *.BAK
+*.COM
 BIN
 THEMAN-cppcheck-build-dir
 THEMAN.cppcheck
+!TOOLS/DELTREE.COM

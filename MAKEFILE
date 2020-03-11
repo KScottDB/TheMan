@@ -1,0 +1,34 @@
+# If you have some "special" DELTREE or C Compiler,
+# or you're running the MAKEFILE on a non-DOS OS,
+# change both this and "DELTREE" to the appropriate options.
+# E.G., if you're running Linux, you'd
+# probably want to have
+# 	DELTREE = rm -rf
+# and
+#	CC = gcc
+# or something.
+
+CC = TCC -ml
+MAIN = MAIN.C
+
+# DOSBox doesn't have a DELTREE command
+DELTREE = TOOLS\DELTREE.COM /Y
+
+BIN\THEMAN.EXE: SRC\$(MAIN) clean BIN BIN\BG.TMF
+	CD SRC
+	$(CC) -n..\BIN\ $(MAIN)
+	CD ..
+
+BIN\BG.TMF: BIN GFX\BG.TMF
+	COPY $> $@
+
+clean: BIN
+	$(DELTREE) BIN
+	MKDIR BIN
+
+BIN:
+	MKDIR BIN
+
+GFX/*.TMF:
+	ECHO Run SPRENC.PY on a modern computer.
+

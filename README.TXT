@@ -11,17 +11,12 @@ FULLY OPEN SOURCE MS-DOS PLATFORMER ENGINE UNDER THE GNU GENERAL PUBLIC LICENSE!
 
               CHECK IT OUT TODAY! https://github.com/KScottDB/TheMan
 
-อ On to the actual readme file... ออออออออออออออออออออออออออออออออออออออออออออออ
+อ Q/A ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
 
 - How do I compile a copy of "Project THE MAN"?
     On a modern computer, run GFX\SPRENC.PY (requires Python 3 and PIL/Pillow),
     then on your DOS machine, make sure you have Borland Turbo C++ 3.0 and
-    run BUILD.BAT.
-
-- When I open the .PNGs in (insert editor) and save, it breaks the graphics!
-    Your editor probably saved it in a non-paletted format,
-    the graphics need to be paletted to convert properly.
-    I recommend MtPaint.
+    run "MAKE". Support for other compilers soon.
 
 - Can I contribute?
     Yes. Please send pull requests.
@@ -31,7 +26,21 @@ FULLY OPEN SOURCE MS-DOS PLATFORMER ENGINE UNDER THE GNU GENERAL PUBLIC LICENSE!
     https://stinky.kscott.cf
 
 - Why did you give it the codename "THE MAN"?
-    the guy i drew. he is the man.
+    the guy i drew. (GFX/SPRITES.PNG) he is the man.
+
+อ Warnings อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
 
 When modifying README.TXT or README, remember to save README as UTF-8
-and README.TXT as OEM (ANSI, IBM Extended, DOS, etc...) to preserve the art!!
+and README.TXT as OEM (ANSI, IBM Extended, DOS, etc...) to preserve the ASCII
+art.
+
+.PNG files are *paletted* 16-color images. Make sure you use an image editor
+that can modify and make proper use of palettes. MtPaint is recommended.
+
+By default, GFX/*.TMF is included with source.
+You will have to regenerate those files with GFX/SPRENC.PY if you edit any PNG
+files.
+
+อ Acknowledgements อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+
+"DELTREE.EXE" from the FreeDOS project, included so MAKEFILE works on DOSBox.
