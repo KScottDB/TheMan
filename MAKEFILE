@@ -20,7 +20,8 @@ BIN\THEMAN.EXE: SRC\$(MAIN) clean BIN BIN\BG.TMF
 	CD ..
 
 BIN\BG.TMF: BIN GFX\BG.TMF
-	COPY $> $@
+	COPY GFX\BG.TMF $@
+	# ^ borland make doesn't support $< or $> correctly :(
 
 clean: BIN
 	$(DELTREE) BIN
@@ -28,7 +29,3 @@ clean: BIN
 
 BIN:
 	MKDIR BIN
-
-GFX/*.TMF:
-	ECHO Run SPRENC.PY on a modern computer.
-

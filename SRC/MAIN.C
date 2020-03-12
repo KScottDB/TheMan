@@ -24,5 +24,8 @@ void main() {
 
 	gfxEnd();
 
+	// Debugging
+	printf("Execution ended normally.");
+
 	return;
 }

@@ -41,6 +41,9 @@ By default, GFX/*.TMF is included with source.
 You will have to regenerate those files with GFX/SPRENC.PY if you edit any PNG
 files.
 
+If these are missing, you will see "Fatal: 'gfx\(...).tmf' does not exist -
+don't know how to make it".
+
 อ Acknowledgements อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
 
 "DELTREE.EXE" from the FreeDOS project, included so MAKEFILE works on DOSBox.
