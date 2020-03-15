@@ -15,9 +15,13 @@
 #undef outp
 
 void main() {
+	struct Image bg;
+	
 	gfxStart();
 
-	loadBG("BG.TMF");
+	bg = loadImg("BG.TMF");
+	drawBG(bg);
+
 	VSync();
 
 	while(!kbhit()) {}

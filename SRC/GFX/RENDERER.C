@@ -42,6 +42,9 @@ void VSync(void) {
 #define SCREEN_HEIGHT 200
 #define SCREEN_AREA SCREEN_WIDTH*SCREEN_HEIGHT
 
+#define SCREENMODE   0x13
+#define SCREENEXMODE 0x03
+
 #define PAL_SIZE 256*3
 
 byte* VGARAM = (byte*)0xA0000000;
@@ -58,11 +61,11 @@ void vgaMode(byte mode) {
 
 void gfxStart(void) {
 	PALRAM = (byte*) malloc(PAL_SIZE);
-	vgaMode(0x13);
+	vgaMode(SCREENMODE);
 }
 
 void gfxEnd(void) {
-	vgaMode(0x3);
+	vgaMode(SCREENEXMODE);
 }
 
 void palUpdate(void) {

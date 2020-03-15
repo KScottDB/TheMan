@@ -8,56 +8,80 @@
 ////////////////////////////////////////
 
 #include <stdio.h>
+#include <errno.h>
 
 #include "TYPEDEFS.H"
 
-void loadBG(const char* filename) {
-	byte *palette, *header, *image;
+word twoDtoOneD(word x, word y, word w) {
+	return x%w + (y * w);
+}
+
+void drawBG(struct Image background) {
+	word x,y;
+
+	if (background.width == SCREEN_WIDTH &&
+	    background.height == SCREEN_HEIGHT) {
+			vgaCopy(background.data, SCREEN_AREA);
+	} else {
+		char* bgbuffer = malloc(SCREEN_AREA);
+
+		for (x=0; x <= SCREEN_WIDTH; x++) for (y=0; y <= SCREEN_HEIGHT; y++) {
+			bgbuffer[ twoDtoOneD(x,y,SCREEN_WIDTH) ] = 
+				background.data[
+					twoDtoOneD(x, y%background.height, background.width)
+				];
+		}
+		vgaCopy(bgbuffer, SCREEN_AREA);
+		free(bgbuffer);
+	}
+}
+
+#define msg_imgcantload "loadIMG: Can't load %s\n"
+struct Image loadImg(const char* filename) {
+	struct Image img;
+	byte *header;
 	word pal_size, image_width, image_height;
 	FILE* fp;
 	
 	header = (char*) malloc(4);
 	
 	fp = fopen(filename, "r");
+	if (fp == NULL) {
+		gfxEnd();
+
+		printf(msg_imgcantload, filename);
+		printf("fopen() returned NULL.\nerrno: %c\n", errno);
+		
+		exit(3);
+	}
 	
 	fread(header, 4, 1, fp); // Get header
-
+	
 	// DEBUGGING: Check "magic number".
 	if (strcmp(header, "TMF") != 0) {
 		gfxEnd();
-
-		printf("Error in TMF parser: Magic number incorrect.\n");
-
+		
+		printf(msg_imgcantload, filename);
+		printf("Magic number incorrect\n");
+		
 		exit(2);
 	}
+
+	free(header); // we've done all we need from the header.
 	
 	fread(&pal_size, 2, 1, fp); // Get palette size
-	palette = malloc(pal_size);
+	img.palette = malloc(pal_size);
 	
-	fread(palette, pal_size, 1, fp); // Get palette
+	fread(img.palette, pal_size, 1, fp); // Get palette
 	
-    palSet(palette, pal_size);
+	fread(&img.width, 2, 1, fp); // Get image size
+	fread(&img.height, 2, 1, fp);
 	
-	fread(&image_width, 2, 1, fp); // Get image size
-	fread(&image_height, 2, 1, fp);
-
-	// DEBUGGING: Check image size. All backgrounds should be
-	// 320*200 at this point.
-	if (image_width != 320 || image_height != 200) {
-		gfxEnd();
-
-		printf("Error in TMF parser: Image size incorrect.\nimage_width: %u\n", image_width);
-		printf("image_height: %u\n", image_height);
-		printf("ftell(): %ld\n", ftell(fp));
-
-		exit(2);
-	}
+	img.data = (byte*) malloc(image_width * image_height);
 	
-	image = (byte*) malloc(image_width * image_height);
-	
-	fread(image, image_width * image_height, 1, fp);
-	
-    vgaCopy(image, image_width * image_height);
+	fread(img.data, image_width * image_height, 1, fp);
 
 	fclose(fp);
+
+	return img;
 }
