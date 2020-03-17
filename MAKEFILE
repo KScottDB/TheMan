@@ -14,7 +14,7 @@ MAIN = MAIN.C
 # DOSBox doesn't have a DELTREE command
 DELTREE = TOOLS\DELTREE.COM /Y
 
-BIN\THEMAN.EXE: SRC\$(MAIN) clean BIN BIN\BG.TMF
+BIN\THEMAN.EXE: SRC\$(MAIN) clean BIN BIN\BG.TMF BIN\SPRITES.TMF
 	CD SRC
 	$(CC) -n..\BIN\ $(MAIN)
 	CD ..
@@ -23,9 +23,15 @@ BIN\BG.TMF: BIN GFX\BG.TMF
 	COPY GFX\BG.TMF $@
 	# ^ borland make doesn't support $< or $> correctly :(
 
+BIN\SPRITES.TMF: BIN GFX\SPRITES.TMF
+	COPY GFX\SPRITES.TMF $@
+
 clean: BIN
 	$(DELTREE) BIN
 	MKDIR BIN
 
 BIN:
 	MKDIR BIN
+
+GFX\BG.TMF GFX\SPRITES.TMF:
+	ECHO Run GFX\TMFMAKE.BAT on a modern Windows computer!

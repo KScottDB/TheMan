@@ -17,13 +17,12 @@ word twoDtoOneD(word x, word y, word w) {
 }
 
 void drawBG(struct Image background) {
-	word x,y;
-
 	if (background.width == SCREEN_WIDTH &&
 	    background.height == SCREEN_HEIGHT) {
 			vgaCopy(background.data, SCREEN_AREA);
 	} else {
 		char* bgbuffer = malloc(SCREEN_AREA);
+		word x,y;
 
 		for (x=0; x <= SCREEN_WIDTH; x++) for (y=0; y <= SCREEN_HEIGHT; y++) {
 			bgbuffer[ twoDtoOneD(x,y,SCREEN_WIDTH) ] = 
@@ -39,11 +38,9 @@ void drawBG(struct Image background) {
 #define msg_imgcantload "loadIMG: Can't load %s\n"
 struct Image loadImg(const char* filename) {
 	struct Image img;
-	byte *header;
-	word pal_size, image_width, image_height;
+	byte* header;
+	word  pal_size, image_width, image_height;
 	FILE* fp;
-	
-	header = (char*) malloc(4);
 	
 	fp = fopen(filename, "r");
 	if (fp == NULL) {
@@ -52,9 +49,10 @@ struct Image loadImg(const char* filename) {
 		printf(msg_imgcantload, filename);
 		printf("fopen() returned NULL.\nerrno: %c\n", errno);
 		
-		exit(3);
+		exit(2);
 	}
 	
+	header = (char*) malloc(4);
 	fread(header, 4, 1, fp); // Get header
 	
 	// DEBUGGING: Check "magic number".
@@ -64,22 +62,22 @@ struct Image loadImg(const char* filename) {
 		printf(msg_imgcantload, filename);
 		printf("Magic number incorrect\n");
 		
-		exit(2);
+		exit(1);
 	}
 
 	free(header); // we've done all we need from the header.
 	
-	fread(&pal_size, 2, 1, fp); // Get palette size
-	img.palette = malloc(pal_size);
+	fread(&img.palsize, 2, 1, fp); // Get palette size
+	img.palette = (byte*) malloc(img.palsize);
 	
-	fread(img.palette, pal_size, 1, fp); // Get palette
+	fread(img.palette, img.palsize, 1, fp); // Get palette
 	
 	fread(&img.width, 2, 1, fp); // Get image size
 	fread(&img.height, 2, 1, fp);
 	
-	img.data = (byte*) malloc(image_width * image_height);
+	img.data = (byte*) malloc(img.width * img.height);
 	
-	fread(img.data, image_width * image_height, 1, fp);
+	fread(img.data, img.width * img.height, 1, fp);
 
 	fclose(fp);
 

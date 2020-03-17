@@ -5,8 +5,9 @@ typedef unsigned char  byte;
 typedef unsigned short word;
 
 struct Image {
-    char* data;
-    char* palette;
+    byte* data;
+    byte* palette;
+    word palsize;
     word width;
     word height;
 };
@@ -20,9 +21,9 @@ struct Image {
 
 // used to be RENDERER.C:
 
-#define SCREEN_WIDTH 320
+#define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 200
-#define SCREEN_AREA SCREEN_WIDTH*SCREEN_HEIGHT
+#define SCREEN_AREA   SCREEN_WIDTH*SCREEN_HEIGHT
 
 #define SCREENMODE   0x13
 #define SCREENEXMODE 0x03

@@ -47,6 +47,7 @@ void vgaMode(byte mode) {
 
 void gfxStart(void) {
 	PALRAM = (byte*) malloc(PAL_SIZE);
+
 	vgaMode(SCREENMODE);
 }
 
@@ -61,11 +62,6 @@ void palUpdate(void) {
 	for (i = 0; i <= PAL_SIZE; i++) { // set palette
 		outp(VGA_PALETTE_COLOR_IO, PALRAM[i] >> 2);
 	}
-}
-
-void palSet(char* palette, int pal_size) {
-	memcpy(PALRAM, palette, pal_size);
-	palUpdate();
 }
 
 void vgaCopy(char* memory, int amount) {

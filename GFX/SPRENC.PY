@@ -15,8 +15,9 @@
 ########################################
 
 from PIL import Image
+import sys
 
-f = "BG"
+f = sys.argv[1]
 
 sprs = Image.open(f+".PNG")
 binout = open(f+".TMF", "wb")
