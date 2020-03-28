@@ -40,17 +40,51 @@ void sprBgPals() {
 }
 
 void main() {
+	char thisk;
+	int x = 0, y = 0;
+	byte gameRunning = 1;
+
 	bg = loadImg("BG.TMF");
 	sprites = loadImg("SPRITES.TMF");
 	
 	gfxStart();
-	
-	drawBG(bg);
-	sprBgPals();
-	
-	VSync();
-	
-	while(!kbhit()) {}
+
+	while (gameRunning) {
+		drawBG(bg, x, y);
+		sprBgPals();
+
+		while (kbhit()) {
+			thisk = getch();
+			switch (thisk) {
+				
+				//// SPECIAL CASES
+				case 0:
+					// Escape sequence
+					break;
+				
+				//// HOTKEYS
+				case 'q': // q => Quit
+					gameRunning = 0;
+					break;
+
+				//// MOVEMENT
+				case 'H': case 'w': // Up (Up arrow, W)
+					y--; break;
+				case 'P': case 's': // Down (Down arrow, S)
+					y++; break;
+				case 'K': case 'a': // Left (Left arrow, A)
+					x--; break;
+				case 'M': case 'd': // Right (Right arrow, D)
+					x++; break;
+
+				default: // key unaccounted for
+					printf("%c", thisk);
+					// print it on-screen for now
+			}
+		}
+
+		VSync();
+	}
 	
 	gfxEnd();
 	

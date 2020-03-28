@@ -16,22 +16,21 @@ word twoDtoOneD(word x, word y, word w) {
 	return x%w + (y * w);
 }
 
-void drawBG(struct Image background) {
+void drawBG(struct Image background, int x_offs, int y_offs) {
 	if (background.width == SCREEN_WIDTH &&
-	    background.height == SCREEN_HEIGHT) {
+	    background.height == SCREEN_HEIGHT &&
+		x_offs % SCREEN_WIDTH == 0 &&
+		y_offs % SCREEN_HEIGHT == 0) {
 			vgaCopy(background.data, SCREEN_AREA);
 	} else {
-		char* bgbuffer = malloc(SCREEN_AREA);
-		word x,y;
-
+		int x,y;
+		
 		for (x=0; x <= SCREEN_WIDTH; x++) for (y=0; y <= SCREEN_HEIGHT; y++) {
-			bgbuffer[ twoDtoOneD(x,y,SCREEN_WIDTH) ] = 
+			VGARAM[ twoDtoOneD(x,y,SCREEN_WIDTH) ] = 
 				background.data[
-					twoDtoOneD(x, y%background.height, background.width)
+					twoDtoOneD(x+x_offs, (y+y_offs)%background.height, background.width) % (background.width*background.height)
 				];
 		}
-		vgaCopy(bgbuffer, SCREEN_AREA);
-		free(bgbuffer);
 	}
 }
 
