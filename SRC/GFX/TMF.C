@@ -23,14 +23,18 @@ void drawBG(struct Image background, int x_offs, int y_offs) {
 		y_offs % SCREEN_HEIGHT == 0) {
 			vgaCopy(background.data, SCREEN_AREA);
 	} else {
+		byte* temp_sc = malloc(SCREEN_AREA);
 		int x,y;
-		
+
 		for (x=0; x <= SCREEN_WIDTH; x++) for (y=0; y <= SCREEN_HEIGHT; y++) {
-			VGARAM[ twoDtoOneD(x,y,SCREEN_WIDTH) ] = 
+			temp_sc[ twoDtoOneD(x,y,SCREEN_WIDTH) ] = 
 				background.data[
 					twoDtoOneD(x+x_offs, (y+y_offs)%background.height, background.width) % (background.width*background.height)
 				];
 		}
+
+		vgaCopy(temp_sc, SCREEN_AREA);
+		free(temp_sc);
 	}
 }
 

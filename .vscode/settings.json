@@ -2,6 +2,7 @@
     "files.associations": {
         "*.C": "c",
         "typedefs.h": "c",
-        "TYPEDEFS.H": "cpp"
+        "TYPEDEFS.H": "cpp",
+        "dos.h": "c"
     }
 }
